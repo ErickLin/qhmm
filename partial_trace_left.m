@@ -1,3 +1,6 @@
+% traces out the outer subsystem
+% sys is the density matrix of the original system
+% dim is the size of the outer subsystem
 function newsys = partial_trace_left(sys, dim)
     n = size(sys, 1) / dim;
     newsys = zeros(n);
