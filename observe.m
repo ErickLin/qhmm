@@ -7,13 +7,12 @@ function [new_state, observation] = observe(Q, p_dm, m)
 n = size(p_dm, 1);
 % size of middle/second subsystem
 q = size(Q, 1) / (n * m);
-% uniformly random vector
-randomness = normc(ones(q, 1));
-randomness_dm = randomness * randomness';
-% output vector starts with all of its weight on index 1 due to design of observation matrix
-observation = zeros(m, 1);
+% uniform distribution
+randomness_dm = to_diag_mat(ones(1, q) / q);
+% output initialized with all its weight on index 1 by convention of observation matrix
+observation = zeros(1, m);
 observation(1) = 1;
-observ_dm = observation * observation';
+observ_dm = to_diag_mat(observation);
 % compose the three subsystems
 sys_dm = kron(kron(p_dm, randomness_dm), observ_dm);
 % perform main unitary transformation

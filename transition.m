@@ -6,15 +6,14 @@ function new_state = transition(U, p_dm)
 n = size(p_dm, 1);
 % size of middle/second subsystem
 q = size(U, 1) / (n * n);
-% uniformly random vector
-randomness = normc(ones(q, 1));
-randomness_dm = randomness * randomness';
-% output vector starts at state 1 due to design of transition matrix
-next_p = zeros(n, 1);
-next_p(1) = 1;
-next_p_dm = next_p * next_p';
+% uniform distribution
+randomness_dm = to_diag_mat(ones(1, q) / q);
+% output initialized to state 1 by convention of transition matrix
+next_x = zeros(1, n);
+next_x(1) = 1;
+next_x_dm = to_diag_mat(next_x);
 % compose the three subsystems
-sys_dm = kron(kron(p_dm, randomness_dm), next_p_dm);
+sys_dm = kron(kron(p_dm, randomness_dm), next_x_dm);
 % perform main unitary transformation
 res = U * sys_dm * U';
 % isolate inner subsystem to obtain result
