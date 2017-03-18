@@ -25,8 +25,11 @@ end
 % convert transition matrix into quantum representation
 U = classical_to_quantum(T, gen_unitary_mats(circshift(eye(n), 1)));
 imagesc(U);
+colormap(flipud(gray));
 % convert observation matrix into quantum representation
 Q = classical_to_quantum(O, gen_unitary_mats(circshift(eye(m), 1)));
+imagesc(Q);
+colormap(flipud(gray));
 %imagesc(Q);
 % check that converting back to classical representations results in the original matrices
 disp('transition matrix reconstructed: ');

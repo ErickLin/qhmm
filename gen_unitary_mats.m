@@ -1,5 +1,5 @@
 % multiplicatively generates a set of unitary matrices out of a single unitary matrix
-function unitary_mats = generate_unitary_mats(unitary_mat)
+function unitary_mats = gen_unitary_mats(unitary_mat)
 n = size(unitary_mat, 1);
 unitary_mats = zeros(n, n, n);
 unitary_mats(:, :, 1) = eye(n);
